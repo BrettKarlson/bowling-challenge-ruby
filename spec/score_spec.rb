@@ -10,7 +10,7 @@ RSpec.describe Score do
 
     it 'returns the number of pins' do
       subject.roll_one(pins: 9)
-      expect(subject.roll_one_pins).to eq(9)
+      expect(subject.result_roll_one).to eq(9)
     end
 
     it 'returns true for a strike' do
@@ -18,9 +18,11 @@ RSpec.describe Score do
       expect(subject.strike?).to be_truthy
     end
 
-    # it 'is initialized with @roll_one_pins set to nil' do
-    #   expect(subject.roll_one_pins).to be_nil
-    # end
+    it 'completes the frame if strike' do
+      subject.roll_one(pins: 10)
+      expect(subject.result_roll_one).to eq(10)
+      expect(subject.result_roll_two).to eq(0)
+    end
   end
 
   context 'second roll' do
@@ -30,7 +32,7 @@ RSpec.describe Score do
 
     it 'returns the number of pins' do
       subject.roll_two(pins: 7)
-      expect(subject.roll_two_pins).to eq(7)
+      expect(subject.result_roll_two).to eq(7)
     end
 
     it 'returns true for a spare' do

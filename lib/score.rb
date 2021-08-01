@@ -1,28 +1,36 @@
 # frozen_string_literal: true
 
 class Score
-  attr_reader :roll_one_pins, :strike, :roll_two_pins, :spare
+  attr_reader :result_roll_one, :result_roll_two
 
   def initialize
     # @roll_one_pins
-    # @strike
     # @roll_two_pins
-    # @spare
   end
 
   def roll_one(pins:)
-    @roll_one_pins = pins
+    if pins == 10
+    @result_roll_one = 10
+    @result_roll_two = 0
+    finish_frame
+    else
+      @result_roll_one = pins
+    end
   end
 
   def strike?
-    @strike = true if @roll_one_pins == 10
+    @result_roll_one == 10
   end
 
   def roll_two(pins:)
-    @roll_two_pins = pins
+    @result_roll_two = pins
   end
 
   def spare?
-    @spare = true if @roll_one_pins + @roll_two_pins == 10
+    @result_roll_one < 10 && @result_roll_one + @result_roll_two == 10
+  end
+
+  def finish_frame
+    
   end
 end
